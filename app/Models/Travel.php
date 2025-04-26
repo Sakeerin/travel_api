@@ -46,5 +46,11 @@ class Travel extends Model
     {
         return $this->number_of_days - 1;
     }
+
+    // Route::get('/travels/{travel}/tours', [TourController::class, 'index']);
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'slug';
+    // }
     
 }
