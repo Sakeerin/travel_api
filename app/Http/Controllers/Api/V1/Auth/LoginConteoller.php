@@ -13,7 +13,7 @@ class LoginConteoller extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
