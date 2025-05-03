@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Travel extends Model
 {
-    use HasFactory, Sluggable, HasUuids;
+    use HasFactory, HasUuids, Sluggable;
 
     protected $table = 'travels';
+
     protected $fillable = [
         'is_public',
         'slug',
@@ -30,8 +31,8 @@ class Travel extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
@@ -52,5 +53,5 @@ class Travel extends Model
     // {
     //     return 'slug';
     // }
-    
+
 }

@@ -4,9 +4,8 @@ use App\Http\Controllers\Api\V1\Admin\TourController as AdminTourController;
 use App\Http\Controllers\Api\V1\Admin\TravelController as AdminTravelController;
 use App\Http\Controllers\Api\V1\Auth\LoginConteoller;
 use App\Http\Controllers\Api\V1\TourController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TravelController;
-
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::get('/travels', [TravelController::class, 'index']);

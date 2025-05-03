@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use App\Models\Role;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AdminTravelTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -25,7 +25,7 @@ class AdminTravelTest extends TestCase
     {
         $this->seed(RoleSeeder::class);
         $user = \App\Models\User::factory()->create();
-        $user->roles()->attach(Role::where('name','editor')->value('id')); // Assuming 2 is the ID for a non-admin role
+        $user->roles()->attach(Role::where('name', 'editor')->value('id')); // Assuming 2 is the ID for a non-admin role
         $response = $this->actingAs($user)->postJson('/api/v1/admin/travels');
         $response->assertStatus(403);
     }
@@ -34,13 +34,13 @@ class AdminTravelTest extends TestCase
     {
         $this->seed(RoleSeeder::class);
         $user = \App\Models\User::factory()->create();
-        $user->roles()->attach(Role::where('name','admin')->value('id')); // Assuming 1 is the ID for admin role
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels',[
+        $user->roles()->attach(Role::where('name', 'admin')->value('id')); // Assuming 1 is the ID for admin role
+        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels', [
             'name' => 'Travel name',
         ]);
         $response->assertStatus(422);
 
-        $responss = $this->actingAs($user)->postJson('/api/v1/admin/travels',[
+        $responss = $this->actingAs($user)->postJson('/api/v1/admin/travels', [
             'name' => 'Travel name',
             'destination' => 'Travel destination',
             'number_of_days' => 5,
@@ -56,15 +56,15 @@ class AdminTravelTest extends TestCase
     {
         $this->seed(RoleSeeder::class);
         $user = \App\Models\User::factory()->create();
-        $user->roles()->attach(Role::where('name','editor')->value('id')); // Assuming 1 is the ID for admin role
+        $user->roles()->attach(Role::where('name', 'editor')->value('id')); // Assuming 1 is the ID for admin role
         $travel = \App\Models\Travel::factory()->create();
 
-        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id,[
+        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name',
         ]);
         $response->assertStatus(422);
 
-        $responss = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id,[
+        $responss = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name',
             'destination' => 'Travel destination',
             'number_of_days' => 5,

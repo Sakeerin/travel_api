@@ -44,5 +44,4 @@ class TravelController extends Controller
 
         return redirect()->route('travels.index')->with('success', 'Travel created successfully.');
     }
-
 }

@@ -7,8 +7,6 @@ use App\Http\Requests\ToursListRequest;
 use App\Http\Resources\TourResource;
 use App\Models\Tour;
 use App\Models\Travel;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class TourController extends Controller
 {
@@ -37,7 +35,8 @@ class TourController extends Controller
             ->when($request->sortBy && $request->sortOrder, callback: function ($query) use ($request) {
                 $query->orderBy($request->sortBy, $request->sortBy->sortOrder);
             });
-            $tours = $query->orderBy('starting_date')->get();
+        $tours = $query->orderBy('starting_date')->get();
+
         return TourResource::collection($tours);
     }
 }

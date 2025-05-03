@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -30,7 +28,7 @@ class LoginTest extends TestCase
         $response = $this->postJson('/api/v1/login', [
             'email' => 'nonexisting@user.com',
             'password' => 'wrongpassword',
-        ]); 
+        ]);
 
         $response->assertStatus(401);
     }
